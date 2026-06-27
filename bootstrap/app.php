@@ -55,4 +55,12 @@ $app->singleton(
 // Tambahkan baris ini agar Laravel pakai folder temporary Vercel
 $app->useStoragePath('/tmp');
 
+// ... kode Laravel lainnya di atas ...
+
+// Paksa storage path ke folder tmp Vercel
+$app->useStoragePath('/tmp');
+
+// Tambahkan baris ini untuk memindahkan cache manifest package ke tmp biar tidak error writable!
+$app->instance('manifest.path', '/tmp/packages.php');
+
 return $app;
