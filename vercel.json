@@ -11,5 +11,10 @@
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
-    ]
+    ],
+    "build": {
+        "env": {
+            "APP_ENV": "production"
+        }
+    }
 }
