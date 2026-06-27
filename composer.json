@@ -47,7 +47,7 @@
             "@php artisan key:generate --ansi"
         ]
     },
-    "extra": {
+   "extra": {
         "laravel": {
             "dont-discover": [
                 "nunomaduro/collision"
