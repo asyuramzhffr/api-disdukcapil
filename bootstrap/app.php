@@ -52,4 +52,7 @@ $app->singleton(
 |
 */
 
+// Tambahkan baris ini agar Laravel pakai folder temporary Vercel
+$app->useStoragePath('/tmp');
+
 return $app;
