@@ -48,12 +48,12 @@
         ]
     },
    "extra": {
-        "laravel": {
-            "dont-discover": [
-                "nunomaduro/collision"
-            ]
-        }
-    },
+    "laravel": {
+        "dont-discover": [
+            "nunomaduro/collision"
+        ]
+    }
+},
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
