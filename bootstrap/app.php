@@ -4,20 +4,20 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
-// --- POTONG KOMPAS CONFIG& MANIFEST LANGSUNG DI INSTANCE ---
+// --- POTONG KOMPAS JALUR MANIFEST & SERVICES KESELURUHAN ---
 $app->useStoragePath('/tmp');
 
-// Kita override path config & cache langsung ke /tmp
-$app->instance('path.config', '/tmp');
+// Kita override fungsi bawaan Laravel untuk menentukan folder cache bootstrap
 $app->instance('manifest.path', '/tmp/packages.php');
 
-// Trik Pamungkas: Daftarkan ulang PackageManifest khusus untuk Vercel
-$app->singleton(\Illuminate\Foundation\PackageManifest::class, function () use ($app) {
-    return new \Illuminate\Foundation\PackageManifest(
-        new \Illuminate\Filesystem\Filesystem,
-        '/tmp', // Base path diubah ke tmp
-        '/tmp/packages.php' // File path diubah ke tmp
-    );
+// Paksa file services.php milik ProviderRepository pindah ke /tmp
+$app->afterResolving(\Illuminate\Foundation\PackageManifest::class, function () use ($app) {
+    $app->instance('path.bootstrap', '/tmp');
+});
+
+// override fungsi getCachedServicesPath bawaan Application.php
+$app->bind('path.bootstrap', function () {
+    return '/tmp';
 });
 // ------------------------------------------------------------
 
